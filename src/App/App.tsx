@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, install } from '@material-ui/styles';
+import { makeStyles, install, ThemeProvider } from '@material-ui/styles';
 import { blueGrey, deepOrange, red } from '@material-ui/core/colors';
-import { CssBaseline, Theme, AppBar, Toolbar, Typography, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { CssBaseline, Theme, createMuiTheme } from '@material-ui/core';
 
 import AppToolbar from './AppToolbar';
 
@@ -45,25 +45,16 @@ const AppStyles = makeStyles({
   }
 });
 
-export type AppProps = {
-  isAuthenticated: boolean;
-};
-
-const initialAppState: AppProps = {
-  isAuthenticated: false
-};
-
-const App: React.FC<AppProps> = React.memo(() => {
+const App: React.FC = React.memo(() => {
   const classes = AppStyles();
-  const [auth, setAuth] = React.useState(initialAppState);
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <main className={classes.root}>
-        <AppToolbar color="primary" className={classes.mainToolbar} />
+        <AppToolbar isAuthenticated={false} className={classes.mainToolbar} />
       </main>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 });
 
