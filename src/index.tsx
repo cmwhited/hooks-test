@@ -1,10 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './bootstrap';
+
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme, Theme, CssBaseline } from '@material-ui/core';
+import { blueGrey, deepOrange, red } from '@material-ui/core/colors';
+
 import App from './App/App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const theme: Theme = createMuiTheme({
+  palette: {
+    primary: blueGrey,
+    secondary: deepOrange,
+    error: {
+      light: red[700],
+      main: red[900],
+      dark: red[900]
+    }
+  },
+  typography: {
+    useNextVariants: true,
+    fontFamily: ['"Nanum Gothic Coding"', 'sans-serif'].join(','),
+    fontSize: 16
+  }
+});
+
+ReactDOM.render(
+  <>
+    <CssBaseline />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
